@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="odata.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Users</title>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">
+            <img src="Project-Icons/user.png" alt="Tatua Logo" width="28" height="28">
+            <span>Users</span>
+        </a>
+    </nav>
+
+    <!-- TOOL BAR -->
+    <div id="toolBar">
+        <!-- SORTING -->
+        <div id="sort">
+            <span class="filter-chip">
+                <span><span id="sort-count">0</span>
+                <a href="#" id="sort-id">Sort</a>
+            </span>
+                <button class="close-btn">
+                    <img src="Project-Icons/close.png" alt="Cancel" width="14" height="14">
+                </button>
+            </span>
+        </div>
+    
+        <!-- FILTERING -->
+        <div id="filter">
+            <span class="filter-chip">
+                <span><span id="filter-count">0</span>
+                    <a href="#" id="filter-id">Filter</a>
+                </span>
+                <button class="close-btn" onclick="removeFilter()">
+                    <img src="Project-Icons/close.png" alt="Cancel" width="14" height="14">
+                </button>
+            </span>
+        </div>
+    
+        <!-- Refresh Button -->
+        <div class="tool" id="refresh">
+            <button onclick="refreshTickets()" class="refreshbutton">
+                <img src="Project-Icons/Refresh.png" alt="Refresh" title="Reload Tickets" width="16" height="16">
+                <span><strong>Refresh</strong></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="loaderOverlay" id="loaderOverlay">
+    <div class="loader" id="loader">
+        <span class="spinner">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <span>Loading...</span>
+    </div>
+</div>
+
+    <!-- UserName,FirstName,LastName,MiddleName,Gender,Age -->
+    <table>
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Middle Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        
+        
+        <tbody id="userTableBody">
+            
+            <!-- Rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <div class="pagination" id="pagination"> 
+		<a href="#" id="prev">Previous</a> 
+		<a href="#" class="page-link" data-page="1">1</a> 
+		<a href="#" class="page-link" data-page="2">2</a> 
+		<a href="#" class="page-link" data-page="3">3</a> 
+		<a href="#" id="next">Next</a> 
+		<p id="page-numbers"> </p> 
+	</div>
+
+    <!----------------------------------------------------------------------------------------------------->
+    <!-- SORT MODAL -->
+    <div class="sortOverlay" id="sortOverlay">
+    <div class="sort_modal" id="sort_modal">
+        <div class="sort-modal-header">
+            <div class="sort-header-left-section">
+            <span class="icon sort-icon"><img src="Project-Icons/filter-variant.png" alt="Sort"></span>
+            <span class="sort-modal-title">Sort Table</span>
+        </div>
+            <button class="close-icon" id="close-icon">
+                <img src="Project-Icons/close-circle-outline.png" alt="Close"></button>
+        
+        </div>
+        
+        <div class="sorter-container" id="sorter-container"></div>
+
+        <div class="sort-modal-body">
+            <button class="add-sorter">
+                <img src="Project-Icons/plus.png" alt="Add Icon">
+                <span>Add Sorter</span>
+            </button>
+        </div>
+        <div class="sort-modal-footer">
+            <button class="sort-reset-btn">Reset Sorting</button>
+            <button class="sort-submit-btn">Submit</button>
+        </div>
+    </div>
+    </div>
+
+    <!--------------------------------------------------------------------------------------------------->
+    <!-- FILTER MODAL -->
+    <div class="filterOverlay" id="filterOverlay">
+    <div class="pop_up" id="filterPopup">
+        <div class="filter-popup-header">
+            <div class="filter-left-section">
+                <span class="ico-n filter-icon"><img src="Project-Icons/filter-icon.png" alt="Filter"></span>
+                <span>Filter Table</span>
+            </div>
+            <button class="filter-close-btn">
+                <img src="Project-Icons/close-circle-outline.png" alt="Close">
+            </button>
+        </div>
+        <div class="filter-body">
+            <div class="filter-rows-container" id="filter-rows-container">
+            </div>
+            <button class="filter-add-btn">
+                <img src="Project-Icons/Filter_Icon.png" alt="Add">
+                Add Filter
+            </button>
+        </div>
+        <div class="filter-footer">
+            <button class="filter-reset-btn">Reset Filter</button>
+            <button class="filter-submit-btn">Submit</button>
+        </div>
+        
+    </div>
+    </div>
+
+    <script src="odata.js"></script>
+</body>
+</html>

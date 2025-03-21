@@ -1,0 +1,635 @@
+body{
+    margin: 0;
+    background-color: #f4f4f4;
+    position: relative;
+    font-family: 'Roboto';
+}
+
+nav{
+    background-color: #2F243A;
+    position: sticky;
+    top: 0;
+    min-height: 50px;
+    color: whitesmoke;
+    
+}
+nav a{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    text-decoration: none;
+    color: whitesmoke;
+
+}
+
+.logo{
+    width: 95%;
+    margin: auto;
+}
+
+.logo span{
+    font-weight: bold;
+}
+
+#toolBar{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: aliceblue;
+    /* margin-left: auto; */
+    
+}
+
+#sort{
+    margin-left: auto;
+    
+}
+
+#sort-count, #filter-count{
+    color: white;
+}
+
+.filter-chip{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #7E1913;
+    padding: 3px;
+}
+
+.filter-chip a {
+    color: white;
+    text-decoration: none;
+}
+
+.close-btn{
+    background: none;
+    border: none;
+}
+
+.refreshbutton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #5856D6;
+}
+
+#refresh button{
+    display: flex;
+    text-align: center;
+    gap: 5px;
+}
+
+.filter-chip a{
+    text-decoration: none;
+}
+
+table{
+    width: 95%;
+    margin: auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th, td{
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+table tr th{
+    border-bottom: 2px solid #5856D6;
+}
+
+
+
+/* ------------------------------------------------------------------ */
+/* SORT POP UP FILTER */
+
+.sortOverlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+    z-index: 1000; /* Above content, below loader */
+}
+
+.sort_modal {
+    display: flex; /* Hidden by default, like .pop_up */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    max-height: 80vh;
+    overflow-y: auto;
+    flex-direction: column;
+    height: 80vh;
+}
+
+.sort-modal-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2F243A;
+    padding: 10px;
+    z-index: 1;
+    height: 40px;
+}
+
+.sort-header-left-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #DB8A74;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.icon.sort-icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon.sort-icon img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.sort-close-btn {
+    border: none;
+    background: none;
+}
+
+.sort-close-btn img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+#close-icon{
+    background: none;
+    border: none;
+}
+
+.sort-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.sort-modal-body{
+    margin: 20px;
+    justify-items: flex-start;
+    /* background-color: red; */
+}
+
+.sorter-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    width: 95%;
+    margin: auto;
+}
+
+.sort-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    position: relative;
+}
+
+.sort-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    font-weight: bold;
+    width: 100%;
+}
+
+.sort-header span {
+    flex: 1;
+    text-align: left;
+}
+
+.sort-column, .sort-order {
+    padding: 5px;
+    width: 150px;
+    flex: 1;
+}
+
+.sort-row .sort-delete-btn {
+    padding: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.sort-row .sort-delete-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+.add-sorter {
+    display: flex;
+    align-items: center;
+    /* justify-items: flex-start; */
+    color: #5856D6;
+    padding: 0;
+    border: none;
+    background: none;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.add-sorter:hover {
+    text-decoration: underline;
+}
+
+.add-sorter img {
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+.sort-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: auto;
+}
+
+.sort-reset-btn,
+.sort-submit-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sort-reset-btn {
+    background: none;
+    color: #7E1913;
+    margin-right: 10px;
+}
+
+.sort-reset-btn:hover {
+    text-decoration: underline;
+}
+
+.sort-submit-btn {
+    background-color: #4F227D;
+    color: #FFFFFF;
+}
+
+/* ----------------------------------------------------------------- */
+
+/* Pop Up Filter */
+.pop_up {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    background-color: white;
+    padding: 20px;
+    /* width: 400px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    max-height: 80vh;
+    overflow-y: auto;
+    flex-direction: column;
+    height: 80vh;
+}
+
+.filter-popup-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2F243A;
+    padding: 10px;
+    z-index: 1;
+    height: 40px;
+}
+
+.filter-left-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #DB8A74;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ico-n.filter-icon {
+    display: flex;
+    align-items: center;
+}
+
+.ico-n.filter-icon img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.filter-close-btn {
+    border: none;
+    background: none;
+}
+
+.filter-close-btn img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.filter-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.filter-rows-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    width: 100%; /* Changed from 70% to full width for consistency */
+}
+
+.filter-row {
+    display: flex; /* Horizontal layout instead of column */
+    align-items: center;
+    gap: 10px; /* Space between elements */
+    padding: 10px 0;
+    position: relative;
+    width: 80%;
+}
+
+.filter-header {
+    display: flex; /* Horizontal layout for header */
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    font-weight: bold;
+    width: 77%;
+}
+
+.filter-header span {
+    flex: 1; /* Equal width for each label */
+    text-align: left;
+}
+
+.filter-column, .filter-relation {
+    padding: 5px;
+    width: 150px; /* Fixed width for selects */
+    flex: 1; /* Allows equal sizing */
+}
+
+.filter-value {
+    padding: 5px;
+    width: 150px; /* Fixed width for input */
+    flex: 1; /* Allows equal sizing */
+}
+
+.filter-row .filter-delete-btn {
+    padding: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Prevents shrinking */
+}
+
+.filter-row .filter-delete-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+.filter-add-btn {
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+    color: #5856D6;
+    padding: 0;
+    border: none;
+    background: none;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.filter-add-btn:hover {
+    text-decoration: underline;
+}
+
+.filter-add-btn img {
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+.filter-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: auto;
+}
+
+.filter-reset-btn,
+.filter-submit-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filter-reset-btn {
+    background: none;
+    color: #7E1913;
+    margin-right: 10px;
+}
+
+.filter-reset-btn:hover {
+    text-decoration: underline;
+}
+
+.filter-submit-btn {
+    background-color: #4F227D;
+    color: #FFFFFF;
+}
+
+
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Space between elements */
+    padding: 20px 0; /* Vertical padding for breathing room */
+    font-size: 14px;
+    font-family: Arial, sans-serif; /* Match your site’s font if different */
+}
+
+.pagination a {
+    text-decoration: none;
+    color: #5856D6; /* Link color matching filter/sort buttons */
+    padding: 8px 12px; /* Comfortable click area */
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s; /* Smooth hover effect */
+}
+
+.pagination a:hover {
+    background-color: #4F227D; /* Button color on hover */
+    color: #FFFFFF; /* White text on hover */
+}
+
+.pagination a#prev, .pagination a#next {
+    font-weight: bold; /* Emphasize Previous/Next */
+}
+
+.pagination a.page-link {
+    background-color: #FFFFFF; /* Default background */
+    border: 1px solid #2F243A; /* Border matching header color */
+}
+
+.pagination a.page-link.active {
+    background-color: #2F243A; /* Active page background */
+    color: #DB8A74; /* Active text color matching headers */
+    border-color: #2F243A; /* Consistent border */
+    font-weight: bold;
+}
+
+.pagination a[style*="display: none"] {
+    display: none !important; /* Ensure hidden links stay hidden */
+}
+
+.pagination p#page-numbers {
+    margin: 0 10px; /* Space around page indicator */
+    color: #2F243A; /* Text color matching headers */
+    font-weight: bold;
+}
+
+
+.loaderOverlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+    z-index: 1999; /* Below loader but above content */
+}
+
+.loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.loader .spinner{
+    width: 120px;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.loader .spinner span{
+    width: 10px;
+    height: 100%;
+    background-color: #4F227D;
+    display: inline-block;
+    animation: moveBars 1.2s infinite ease-in-out;
+}
+
+.loader .spinner span:nth-child(2){
+    animation-delay: 0.2s;
+}
+
+.loader .spinner span:nth-child(3){
+    animation-delay: 0.4s;
+}
+
+.loader .spinner span:nth-child(4){
+    animation-delay: 0.6s;
+}
+
+.loader span:last-child{
+    color: #2F243A;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+@keyframes moveBars {
+    0% {transform: translateX(-20px);
+    opacity: 0.3;
+    }
+    50%{transform: translateX(0);
+    opacity: 1;
+    }
+    100%{
+        transform: translateX(20px);
+        opacity: 0.3;
+    }
+}
+
+.filterOverlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+    z-index: 1000; /* Above content, below loader */
+}
